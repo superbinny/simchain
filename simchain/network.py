@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import time
-import random
+from .myrandom import myrandom as Random
+# Binny 修改，产生固定的随机数据
+random = Random()
+
 from .datatype import Vin,Vout,Tx,Block,get_merkle_root_of_txs
 from .logger import logger
 from .peer import Peer,find_utxos_from_block,add_utxos_to_set
@@ -10,7 +13,6 @@ from .consensus import consensus_with_fasttest_minner
 from .params import Params
 from math import ceil
 from itertools import accumulate
-
 
 #Class p2p Network 
 # =============================================================================

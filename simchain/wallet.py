@@ -5,7 +5,9 @@ from .ecc import (SigningKey,VerifyingKey,randrange_from_seed__trytryagain,sha25
                  convert_pubkey_to_addr,secp256k1)
 from .logger import logger
 
-
+from .myrandom import myrandom as Random
+# Binny 修改，产生固定的随机数据
+random = Random()
 
 class Keys(tuple):
     
@@ -54,6 +56,8 @@ def make_key(seed):
 
 def generate_keys_by_ecdsa():
     seed = os.urandom(secp256k1.baselen)
+    # 使用随机数
+    seed = random.urandom(secp256k1.baselen)
     signkey = make_key(seed)
     pubkey = signkey.get_verifying_key()
     return signkey,pubkey

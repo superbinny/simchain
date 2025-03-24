@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import random
+# 修改为欸随机数
+# import random
+from .myrandom import myrandom as Random
+# Binny 修改，产生固定的随机数据
+random = Random()
 from .ecc import VerifyingKey,build_message,convert_pubkey_to_addr
 from .datatype import Pointer,Vin,Vout,UTXO,Tx,Block,get_merkle_root_of_txs
 from .params import Params

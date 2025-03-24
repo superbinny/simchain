@@ -5,7 +5,10 @@ import math
 
 import struct
 import binascii
-from random import SystemRandom
+# 修改为欸随机数，每次可以得到固定的私钥
+# from random import SystemRandom
+from .myrandom import MySystemRandom
+SystemRandom = MySystemRandom()
 from hashlib import sha256,new
 from .base58 import b58encode_check,b58decode_check
 
@@ -553,8 +556,9 @@ def verify(sig,G,K,message):
 
 
 #######Try all possibilities
-
-from time import clock
+# time.clock() 在 3.3 版本后已移除，可使用**perf_counter()或者process_time()
+# from time import clock
+from time import perf_counter as clock
 from math import sqrt,ceil
 def crack_by_brute_force(G,K):
     start_time = clock()
