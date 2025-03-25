@@ -437,7 +437,7 @@ class SigningKey(object):
         h = bytes_to_number(message)
         r, s = 0, 0
         while r == 0 or s == 0:
-            rk = SystemRandom().randrange(1, n)
+            rk = SystemRandom.randrange(1, n)
             rG = rk*G
             r = rG.x
             s = ((h + (r*k)%n)*inv_mod(rk, n)) % n
@@ -525,7 +525,7 @@ def sign(message,G,k):
     h = bytes_to_number(mess_hash)
     r, s, = 0, 0
     while r == 0 or s == 0:
-        rk = SystemRandom().randrange(1, n)
+        rk = SystemRandom.randrange(1, n)
         rG = rk*G
         r = rG.x
         s = ((h + (r*k)%n)*inv_mod(rk, n)) % n
@@ -596,10 +596,10 @@ def crack_by_pollard_rho(G,K,bits):
     start_time = clock()
     R,n = [], G.order
     for i in range(2**bits):
-        a, b = SystemRandom().randrange(0,n), SystemRandom().randrange(0,n)
+        a, b = SystemRandom.randrange(0,n), SystemRandom.randrange(0,n)
         R.append(a * G + b *K, a, b)
 
-    At, Bt = SystemRandom().randrange(0,n), SystemRandom().randrange(0,n)
+    At, Bt = SystemRandom.randrange(0,n), SystemRandom.randrange(0,n)
     Ah, Bh = At, Bt
     T = At * G + Bt * K
     H = Ah * G + Bh * K

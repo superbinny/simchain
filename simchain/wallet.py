@@ -34,9 +34,9 @@ class Wallet(object):
         self.keys = []
         self.addrs = []
     
-    def generate_keys(self):
+    def generate_keys(self, seed=0):
         if self.keys_generation_method == 'ecc':
-            sk,pk = generate_keys_by_ecdsa()
+            sk,pk = generate_keys_by_ecdsa(seed=seed)
             keys = Keys(sk,pk)
             addr = convert_pubkey_to_addr(pk.to_bytes())
             self.keys.append(keys)
@@ -54,10 +54,10 @@ def make_key(seed):
     number = randrange_from_seed__trytryagain(seed,secp256k1.order)
     return SigningKey.from_number(number)
 
-def generate_keys_by_ecdsa():
-    seed = os.urandom(secp256k1.baselen)
+def generate_keys_by_ecdsa(seed=0):
+    # seed = os.urandom(secp256k1.baselen)
     # 使用随机数
-    seed = random.urandom(secp256k1.baselen)
+    seed = random.urandom(seed, secp256k1.baselen)
     signkey = make_key(seed)
     pubkey = signkey.get_verifying_key()
     return signkey,pubkey

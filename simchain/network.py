@@ -147,7 +147,7 @@ class Network(object):
 def create_peer(net,peer):
     peer.pid = net.nop
     peer.network = net
-    peer.wallet.generate_keys()
+    peer.wallet.generate_keys(seed=peer.pid)
     net.peers.append(peer)
 
 

@@ -39,13 +39,17 @@ class myrandom():
         self.uniform = random.uniform(start, end)
         return self.uniform
     
-    def urandom(self, length):
+    def urandom(self, seed, length):
         ret_str = []
+        self.current = seed
         for i in range(length):
             index = self.randint(0, length - 1)
             ret_str.append(self.full_string[index])
         return bytes(ret_str)
     
+    def sample(self, *args, **kwargs):
+        return random.sample(*args, **kwargs)
+        
 class MySystemRandom():
     def __init__(self):
         # super().__init__()  # 初始化父类
